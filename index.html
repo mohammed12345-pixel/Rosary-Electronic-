@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>سبحة إلكترونية - زر دائري</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Amiri&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Amiri', serif;
+    direction: rtl;
+    background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sebha-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 30px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    margin-bottom: 30px;
+    color: #6a1b9a;
+    letter-spacing: 2px;
+  }
+
+  .zekr {
+    font-size: 2.5rem;
+    color: #4a148c;
+    font-weight: 700;
+    margin-bottom: 40px;
+    user-select: none;
+    font-style: italic;
+  }
+
+  .counter {
+    font-size: 7rem;
+    color: #ab47bc;
+    font-weight: 900;
+    margin-bottom: 50px;
+    user-select: none;
+  }
+
+  /* الزر دائري كبير */
+  .btn-sebha {
+    background: linear-gradient(45deg, #8e24aa, #d81b60);
+    border: none;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    color: white;
+    font-size: 2.5rem;
+    cursor: pointer;
+    transition: background 0.4s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 25px rgba(216,27,96,0.7);
+    user-select: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .btn-sebha:hover {
+    background: linear-gradient(45deg, #d81b60, #8e24aa);
+    transform: scale(1.1);
+  }
+
+  .btn-reset {
+    margin-top: 40px;
+    background: #6a1b9a;
+    color: #fff;
+    border: none;
+    padding: 16px 60px;
+    font-size: 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    user-select: none;
+  }
+
+  .btn-reset:hover {
+    background: #4a148c;
+  }
+</style>
+</head>
+<body>
+
+<div class="sebha-container">
+  <h1>السبحة الإلكترونية</h1>
+  <div class="zekr">استغفر الله العظيم</div>
+  <div class="counter" id="count">0</div>
+  <button class="btn-sebha" id="sebhaBtn">سبح</button>
+  <button class="btn-reset" id="resetBtn">إعادة التعيين</button>
+</div>
+
+<script>
+  const sebhaBtn = document.getElementById('sebhaBtn');
+  const countEl = document.getElementById('count');
+  const resetBtn = document.getElementById('resetBtn');
+
+  const colors = [
+    '#8e24aa', // بنفسجي غامق
+    '#d81b60', // وردي
+    '#f06292', // وردي فاتح
+    '#ba68c8', // بنفسجي فاتح
+    '#ce93d8', // بنفسجي باهت
+    '#ab47bc', // بنفسجي متوسط
+  ];
+
+  let count = 0;
+
+  sebhaBtn.addEventListener('click', () => {
+    count++;
+    countEl.textContent = count;
+
+    const colorIndex = count % colors.length;
+    countEl.style.color = colors[colorIndex];
+
+    sebhaBtn.style.transform = 'scale(1.2)';
+    sebhaBtn.style.boxShadow = `0 0 25px ${colors[colorIndex]}`;
+    setTimeout(() => {
+      sebhaBtn.style.transform = 'scale(1)';
+      sebhaBtn.style.boxShadow = '0 8px 25px rgba(216,27,96,0.7)';
+    }, 150);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    count = 0;
+    countEl.textContent = count;
+    countEl.style.color = colors[0];
+  });
+</script>
+
+</body>
+</html>
