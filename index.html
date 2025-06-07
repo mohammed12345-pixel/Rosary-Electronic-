@@ -62,7 +62,6 @@
     user-select: none;
   }
 
-  /* الزر دائري كبير */
   .btn-sebha {
     background: linear-gradient(45deg, #8e24aa, #d81b60);
     border: none;
@@ -121,15 +120,14 @@
   const resetBtn = document.getElementById('resetBtn');
 
   const colors = [
-    '#8e24aa', // بنفسجي غامق
-    '#d81b60', // وردي
-    '#f06292', // وردي فاتح
-    '#ba68c8', // بنفسجي فاتح
-    '#ce93d8', // بنفسجي باهت
-    '#ab47bc', // بنفسجي متوسط
+    '#8e24aa', '#d81b60', '#f06292',
+    '#ba68c8', '#ce93d8', '#ab47bc',
   ];
 
-  let count = 0;
+  // استرجاع العدد من localStorage
+  let count = localStorage.getItem('sebhaCount') ? parseInt(localStorage.getItem('sebhaCount')) : 0;
+  countEl.textContent = count;
+  countEl.style.color = colors[count % colors.length];
 
   sebhaBtn.addEventListener('click', () => {
     count++;
@@ -137,6 +135,9 @@
 
     const colorIndex = count % colors.length;
     countEl.style.color = colors[colorIndex];
+
+    // حفظ العدد في localStorage
+    localStorage.setItem('sebhaCount', count);
 
     sebhaBtn.style.transform = 'scale(1.2)';
     sebhaBtn.style.boxShadow = `0 0 25px ${colors[colorIndex]}`;
@@ -150,6 +151,7 @@
     count = 0;
     countEl.textContent = count;
     countEl.style.color = colors[0];
+    localStorage.setItem('sebhaCount', count); // تحديث التخزين عند التصفير
   });
 </script>
 
